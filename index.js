@@ -2,30 +2,27 @@ const mineflayer = require('mineflayer');
 
 function createBot() {
   const bot = mineflayer.createBot({
-    host: 'RoyalPixel.aternos.me', // IP
-    port: 49406, // Port
-    username: 'AFK_Bot', // Minecraft username
-    version: false, // Auto version
+    host: 'RoyalPixel.aternos.me', // Aapka server IP
+    port: 49406,                   // Aapka server port
+    username: 'AFK_Bot',          // Bot ka username
+    version: false                // Auto Minecraft version
   });
 
   bot.once('spawn', () => {
     console.log('✅ Bot has spawned and is online!');
-    
-    // Safe jump every 60 seconds
-    setInterval(() => {
-      bot.setControlState('jump', true);
-      setTimeout(() => bot.setControlState('jump', false), 300); // Shorter jump time
-    }, 60000); // Jump every 60 seconds
+
+    // Enable continuous jumping
+    bot.setControlState('jump', true);
   });
 
-  // Make sure these are outside spawn
+  // Auto reconnect on disconnect
   bot.on('end', () => {
-    console.log('❌ Bot disconnected, reconnecting...');
+    console.log('❌ Bot disconnected, reconnecting in 5s...');
     setTimeout(createBot, 5000);
   });
 
   bot.on('error', err => {
-    console.log('⚠️ Error:', err);
+    console.log('⚠️ Bot error:', err);
   });
 }
 

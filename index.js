@@ -2,36 +2,20 @@ const mineflayer = require('mineflayer');
 
 function createBot() {
   const bot = mineflayer.createBot({
-    host: 'RoyalPixel.aternos.me', // Server IP
-    port: 49406, // Server Port
-    username: 'AFK_Bot', // Bot name
-    version: false // Auto version
+    host: 'RoyalPixel.aternos.me',
+    port: 49406,
+    username: 'AFK_Bot',
+    version: false
   });
 
-  let jumpInterval; // To clear later
-  let disconnectTimeout; // For forced disconnect
-
   bot.once('spawn', () => {
-    console.log('✅ Bot has spawned and is online!');
-
-    // Start continuous jumping
-    bot.setControlState('jump', true);
-
-    // Force disconnect after 60 seconds (1 minute)
-    disconnectTimeout = setTimeout(() => {
-      console.log('🕒 Disconnecting after 1 minute...');
-      bot.quit(); // Clean disconnect
-    }, 60000); // 60,000 ms = 1 minute
+    console.log('✅ Bot online!');
+    bot.setControlState('jump', true); // AFK simulation
   });
 
   bot.on('end', () => {
-    console.log('❌ Bot disconnected, reconnecting in 5 seconds...');
-
-    // Cleanup
-    clearInterval(jumpInterval);
-    clearTimeout(disconnectTimeout);
-
-    setTimeout(createBot, 5000); // Reconnect after 5 sec
+    console.log('❌ Disconnected. Reconnecting in 5s...');
+    setTimeout(createBot, 5000); // reconnect if kicked or server restarts
   });
 
   bot.on('error', err => {

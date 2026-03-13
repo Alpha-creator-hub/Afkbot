@@ -4,8 +4,8 @@ const express = require('express');
 // ==== Mineflayer Bot Code ====
 function createBot() {
   const bot = mineflayer.createBot({
-    host: 'RoyalPixel.aternos.me',
-    port: 49406,
+    host: 'RishabhXSuryansh.aternos.me',
+    port: RishabhXSuryansh.aternos.me,
     username: 'AFK_Bot',
     version: false
   });

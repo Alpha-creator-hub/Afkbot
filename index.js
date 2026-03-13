@@ -5,7 +5,7 @@ const express = require('express');
 function createBot() {
   const bot = mineflayer.createBot({
     host: 'RishabhXSuryansh.aternos.me',
-    port: RishabhXSuryansh.aternos.me,
+    port: 50445,
     username: 'AFK_Bot',
     version: false
   });
